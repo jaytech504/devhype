@@ -1,34 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import {
   Linkedin,
   Twitter,
   MessageSquare,
   FileText,
   Sparkles,
+  Loader2,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import GitHubPicker from "@/components/dashboard/github-picker";
+import { generatePost } from "@/app/actions/generate";
 
 type ContentType = "linkedin" | "twitter" | "thread" | "script";
+type Style = "professional" | "hype" | "story";
 
 export default function ContentStudio() {
   const [contentType, setContentType] = useState<ContentType>("linkedin");
-  const [selectedRepo, setSelectedRepo] = useState("project-alpha");
-  const [selectedAngle, setSelectedAngle] = useState("humble-brag");
+  const [selectedRepo, setSelectedRepo] = useState("");
+  const [selectedCommits, setSelectedCommits] = useState<string[]>([]);
+  const [style, setStyle] = useState<Style>("professional");
+  const [angle, setAngle] = useState("");
   const [content, setContent] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
 
-  const repos = [
-    { value: "project-alpha", label: "Project Alpha" },
-    { value: "saas-kit", label: "SaaS Kit" },
-  ];
-
-  const angles = [
-    { value: "humble-brag", label: "Humble Brag" },
-    { value: "tutorial", label: "Tutorial" },
+  const styles = [
+    { value: "professional", label: "Professional" },
+    { value: "hype", label: "Hype" },
     { value: "story", label: "Story" },
   ];
 
@@ -59,32 +61,41 @@ export default function ContentStudio() {
     },
   ];
 
-  const handleGenerate = () => {
-    // Mock content generation
-    const mockContent = {
-      linkedin: "🚀 Just shipped a major feature update! Excited to share what we've been building...",
-      twitter: "Just shipped a new feature! 🎉 #coding #webdev",
-      thread: [
-        "1/ Just shipped a new feature! 🎉",
-        "2/ Here's what I learned building it...",
-        "3/ The key insight was...",
-      ],
-      script: {
-        visual: "Show code snippet, then transition to demo",
-        audio: "Today I want to share how I built this feature...",
-      },
-    };
+  const handleGenerate = async () => {
+    if (!selectedRepo || selectedCommits.length === 0) {
+      alert("Please select a repository and at least one commit.");
+      return;
+    }
 
-    if (contentType === "thread") {
-      setContent(mockContent.thread.join("\n\n"));
-    } else if (contentType === "script") {
-      setContent(
-        `Visual: ${mockContent.script.visual}\n\nAudio: ${mockContent.script.audio}`
-      );
-    } else {
-      setContent(mockContent[contentType]);
+    setIsGenerating(true);
+    setContent("");
+
+    try {
+      const generatedContent = await generatePost({
+        repoName: selectedRepo,
+        platform: contentType,
+        commitShas: selectedCommits,
+        style: style,
+        angle: angle.trim() || undefined,
+      });
+
+      setContent(generatedContent);
+    } catch (error) {
+      console.error("Error generating content:", error);
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to generate content. Please try again.";
+      alert(errorMessage);
+    } finally {
+      setIsGenerating(false);
     }
   };
+
+  const handleGitHubSelection = useCallback((repoName: string, commits: string[]) => {
+    setSelectedRepo(repoName);
+    setSelectedCommits(commits);
+  }, []);
 
   const renderPreview = () => {
     switch (contentType) {
@@ -222,11 +233,10 @@ export default function ContentStudio() {
                       key={format.type}
                       onClick={() => setContentType(format.type)}
                       variant={isActive ? "default" : "outline"}
-                      className={`h-auto flex-col gap-2 py-4 ${
-                        isActive
-                          ? `bg-gradient-to-r ${format.color} text-white`
-                          : "border-slate-700 text-slate-300 hover:border-purple-500/50"
-                      }`}
+                      className={`h-auto flex-col gap-2 py-4 ${isActive
+                        ? `bg-gradient-to-r ${format.color} text-white`
+                        : "border-slate-700 text-slate-300 hover:border-purple-500/50"
+                        }`}
                     >
                       <Icon className="h-5 w-5" />
                       <span className="text-xs">{format.label}</span>
@@ -236,50 +246,59 @@ export default function ContentStudio() {
               </div>
             </div>
 
-            {/* Repo Selector */}
+            {/* GitHub Picker */}
+            <GitHubPicker onSelectionChange={handleGitHubSelection} />
+
+            {/* Style Selector */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-400">
-                Repository
+                Style
               </label>
               <Select
-                value={selectedRepo}
-                onChange={(e) => setSelectedRepo(e.target.value)}
+                value={style}
+                onChange={(e) => setStyle(e.target.value as Style)}
                 className="w-full"
               >
-                {repos.map((repo) => (
-                  <option key={repo.value} value={repo.value}>
-                    {repo.label}
+                {styles.map((styleOption) => (
+                  <option key={styleOption.value} value={styleOption.value}>
+                    {styleOption.label}
                   </option>
                 ))}
               </Select>
             </div>
 
-            {/* Angle/Vibe Selector */}
+            {/* Angle Text Input */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-400">
-                Angle / Vibe
+                Angle (Optional)
               </label>
-              <Select
-                value={selectedAngle}
-                onChange={(e) => setSelectedAngle(e.target.value)}
-                className="w-full"
-              >
-                {angles.map((angle) => (
-                  <option key={angle.value} value={angle.value}>
-                    {angle.label}
-                  </option>
-                ))}
-              </Select>
+              <input
+                type="text"
+                value={angle}
+                onChange={(e) => setAngle(e.target.value)}
+                placeholder="e.g., Focus on the technical challenges..."
+                className="flex h-10 w-full rounded-md border border-slate-700 bg-slate-900/50 px-3 py-2 text-sm text-slate-200 ring-offset-slate-950 placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              />
             </div>
 
             {/* Generate Button */}
             <Button
               onClick={handleGenerate}
+              disabled={isGenerating}
               size="lg"
-              className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white shadow-lg shadow-purple-500/50 hover:scale-105 hover:shadow-purple-500/70"
+              className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white shadow-lg shadow-purple-500/50 hover:scale-105 hover:shadow-purple-500/70 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
-              <Sparkles className="mr-2 h-5 w-5" />
-              Generate Content
+              {isGenerating ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Generating...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="mr-2 h-5 w-5" />
+                  Generate Content
+                </>
+              )}
             </Button>
           </div>
 

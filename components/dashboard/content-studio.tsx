@@ -71,13 +71,13 @@ export default function ContentStudio() {
     setContent("");
 
     try {
-      const generatedContent = await generatePost({
-        repoName: selectedRepo,
-        platform: contentType,
-        commitShas: selectedCommits,
-        style: style,
-        angle: angle.trim() || undefined,
-      });
+      const generatedContent = await generatePost(
+        selectedRepo,
+        selectedCommits,
+        contentType,
+        style,
+        angle.trim() || undefined
+      );
 
       setContent(generatedContent);
     } catch (error) {

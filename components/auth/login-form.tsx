@@ -36,13 +36,12 @@ export default function LoginForm() {
             onClick={handleSignIn}
             disabled={loading}
             size="lg"
-            className="w-full group relative overflow-hidden bg-gradient-to-r from-purple-600 to-cyan-600 px-8 py-6 text-lg font-semibold text-white shadow-lg shadow-purple-500/50 transition-all hover:scale-105 hover:shadow-purple-500/70 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-8 py-6 text-lg font-semibold"
         >
-            <span className="relative z-10 flex items-center justify-center gap-2">
+            <span className="flex items-center justify-center gap-2">
                 <Github className="h-5 w-5" />
                 {loading ? "Signing in..." : "Sign in with GitHub"}
             </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-cyan-400 opacity-0 transition-opacity group-hover:opacity-100"></div>
         </Button>
     );
 }

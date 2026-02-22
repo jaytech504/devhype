@@ -39,11 +39,8 @@ export default function FeatureGrid() {
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            Everything you need to{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              grow your presence
-            </span>
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            Everything you need to grow your presence
           </h2>
         </motion.div>
 
@@ -55,15 +52,17 @@ export default function FeatureGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 p-8 backdrop-blur-sm transition-all hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20"
+              className="group relative overflow-hidden rounded-xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:shadow-md"
             >
               <div
-                className={`mb-6 inline-flex rounded-lg bg-gradient-to-r ${feature.gradient} p-3`}
+                className="mb-6 inline-flex rounded-lg bg-indigo-50 p-3 text-indigo-600"
               >
-                <feature.icon className="h-6 w-6 text-white" />
+                <feature.icon className="h-6 w-6" />
               </div>
-              <h3 className="mb-3 text-xl font-semibold">{feature.title}</h3>
-              <p className="text-slate-400">{feature.description}</p>
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">
+                {feature.title}
+              </h3>
+              <p className="text-sm text-slate-600">{feature.description}</p>
 
               {/* Multi-platform icons */}
               {feature.subIcons && (
@@ -71,16 +70,13 @@ export default function FeatureGrid() {
                   {feature.subIcons.map((Icon, iconIndex) => (
                     <div
                       key={iconIndex}
-                      className="rounded-lg border border-slate-700 bg-slate-800/50 p-2 transition-colors hover:border-cyan-500/50"
+                      className="rounded-lg border border-slate-200 bg-slate-50 p-2 transition-colors hover:border-indigo-200"
                     >
-                      <Icon className="h-5 w-5 text-slate-400" />
+                      <Icon className="h-5 w-5 text-slate-500" />
                     </div>
                   ))}
                 </div>
               )}
-
-              {/* Hover glow effect */}
-              <div className="absolute inset-0 -z-10 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-cyan-500/0 opacity-0 transition-opacity group-hover:opacity-100"></div>
             </motion.div>
           ))}
         </div>

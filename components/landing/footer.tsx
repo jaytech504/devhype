@@ -11,7 +11,7 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-800 bg-slate-900/30 px-4 py-12 sm:px-6 lg:px-8">
+    <footer className="border-t border-slate-200 bg-white px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           {/* Logo/Brand */}
@@ -20,11 +20,9 @@ export default function Footer() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-xl font-bold"
+            className="text-xl font-bold text-slate-900"
           >
-            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              DevHype
-            </span>
+            DevHype
           </motion.div>
 
           {/* Links */}
@@ -39,7 +37,7 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-slate-400 transition-colors hover:text-purple-400"
+                className="text-sm text-slate-500 transition-colors hover:text-slate-900"
               >
                 {link.label}
               </Link>
@@ -48,7 +46,7 @@ export default function Footer() {
               href="https://twitter.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-cyan-400"
+              className="flex items-center gap-2 text-sm text-slate-500 transition-colors hover:text-slate-900"
             >
               <Twitter className="h-4 w-4" />
               <span>Twitter</span>

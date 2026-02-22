@@ -39,14 +39,12 @@ export default function Sidebar({ userEmail, userAvatar }: SidebarProps) {
       {/* Logo */}
       <div className="mb-8 px-6 pt-6">
         <Link href="/dashboard" className="flex items-center">
-          <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-            DevHype
-          </span>
+          <span className="text-2xl font-bold text-slate-900">DevHype</span>
         </Link>
       </div>
 
       {/* Navigation Links */}
-      <nav className="flex-1 px-4 space-y-2">
+      <nav className="flex-1 px-4 space-y-1">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
@@ -56,10 +54,10 @@ export default function Sidebar({ userEmail, userAvatar }: SidebarProps) {
               href={item.href}
               onClick={() => setIsMobileOpen(false)}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
+                "flex items-center gap-3 rounded-md px-4 py-2 text-sm font-medium transition-colors",
                 isActive
-                  ? "bg-gradient-to-r from-purple-600/20 to-cyan-600/20 text-purple-400 border border-purple-500/30"
-                  : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
+                  ? "bg-indigo-50 text-indigo-600"
+                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
               )}
             >
               <Icon className="h-5 w-5" />
@@ -70,21 +68,21 @@ export default function Sidebar({ userEmail, userAvatar }: SidebarProps) {
       </nav>
 
       {/* User Profile */}
-      <div className="border-t border-slate-800 px-4 py-4">
+      <div className="border-t border-slate-200 px-4 py-4">
         <div className="flex items-center gap-3">
           {userAvatar ? (
             <img
               src={userAvatar}
               alt="User avatar"
-              className="h-10 w-10 rounded-full border border-slate-700"
+              className="h-10 w-10 rounded-full border border-slate-200"
             />
           ) : (
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-cyan-500">
-              <User className="h-5 w-5 text-white" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-white">
+              <User className="h-5 w-5" />
             </div>
           )}
           <div className="flex-1 min-w-0">
-            <p className="truncate text-sm font-medium text-slate-200">
+            <p className="truncate text-sm font-medium text-slate-900">
               {userEmail?.split("@")[0] || "User"}
             </p>
             <p className="truncate text-xs text-slate-500">{userEmail}</p>
@@ -102,7 +100,7 @@ export default function Sidebar({ userEmail, userAvatar }: SidebarProps) {
           variant="outline"
           size="icon"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="border-slate-700 bg-slate-900/50 text-slate-200"
+          className="border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
         >
           {isMobileOpen ? (
             <X className="h-5 w-5" />
@@ -115,7 +113,7 @@ export default function Sidebar({ userEmail, userAvatar }: SidebarProps) {
       {/* Mobile Overlay */}
       {isMobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-slate-950/80 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-slate-900/40 lg:hidden"
           onClick={() => setIsMobileOpen(false)}
         />
       )}
@@ -123,7 +121,7 @@ export default function Sidebar({ userEmail, userAvatar }: SidebarProps) {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed left-0 top-0 z-40 h-screen w-64 border-r border-slate-800 bg-slate-900/50 backdrop-blur-sm flex flex-col transition-transform duration-300",
+          "fixed left-0 top-0 z-40 h-screen w-64 border-r border-slate-200 bg-slate-50/50 flex flex-col transition-transform duration-300",
           isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >

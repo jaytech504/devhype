@@ -14,17 +14,14 @@ export default async function LoginPage() {
     }
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-slate-950 px-4">
+        <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
             <div className="w-full max-w-md">
-                <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-8 backdrop-blur-sm shadow-lg">
+                <div className="rounded-xl border border-slate-200 bg-white p-8 shadow-md">
                     <div className="mb-8 text-center">
-                        <h1 className="text-3xl font-bold tracking-tight">
-                            Welcome to{" "}
-                            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                                DevHype
-                            </span>
+                        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+                            Welcome to DevHype
                         </h1>
-                        <p className="mt-2 text-slate-400">
+                        <p className="mt-2 text-slate-500">
                             Sign in to get started with your GitHub integration
                         </p>
                     </div>

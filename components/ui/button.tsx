@@ -12,13 +12,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         className={cn(
-          "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed",
+          "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-100 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed",
           {
-            "bg-gradient-to-r from-purple-600 to-cyan-600 text-white shadow-lg shadow-purple-500/50 hover:from-purple-500 hover:to-cyan-500 hover:shadow-purple-500/70":
+            // Primary
+            "bg-slate-900 text-white hover:bg-slate-800 shadow-sm":
               variant === "default",
-            "border border-slate-700 bg-transparent text-slate-200 hover:bg-slate-800 hover:border-purple-500/50":
+            // Secondary
+            "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50":
               variant === "outline",
-            "bg-transparent text-slate-200 hover:bg-slate-800 hover:text-purple-400":
+            // Ghost / tertiary
+            "bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900":
               variant === "ghost",
             "h-10 px-4 py-2": size === "default",
             "h-9 px-3 text-xs": size === "sm",

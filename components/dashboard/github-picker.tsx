@@ -80,9 +80,9 @@ export default function GitHubPicker({ onSelectionChange }: GitHubPickerProps) {
         if (!owner || !repo) {
           throw new Error("Invalid repository format");
         }
-        
+
         const commitsData = await fetchRepoCommits(owner, repo);
-        
+
         if (!cancelled) {
           setCommits(commitsData);
           setSelectedCommits(new Set());
@@ -141,17 +141,17 @@ export default function GitHubPicker({ onSelectionChange }: GitHubPickerProps) {
     <div className="space-y-4">
       {/* Repo Selector */}
       <div>
-        <label className="mb-3 block text-sm font-medium text-slate-400">
+        <label className="mb-3 block text-sm font-medium text-slate-700">
           Repository
         </label>
         {loading ? (
-          <div className="flex items-center justify-center rounded-md border border-slate-700 bg-slate-900/50 px-3 py-2">
+          <div className="flex items-center justify-center rounded-md border border-slate-200 bg-white px-3 py-2 shadow-sm">
             <Loader2 className="h-4 w-4 animate-spin text-slate-400" />
-            <span className="ml-2 text-sm text-slate-400">Loading repos...</span>
+            <span className="ml-2 text-sm text-slate-500">Loading repos...</span>
           </div>
         ) : error ? (
-          <div className="rounded-md border border-red-500/50 bg-red-500/10 p-3">
-            <div className="flex items-center gap-2 text-sm text-red-400">
+          <div className="rounded-md border border-red-200 bg-red-50 p-3">
+            <div className="flex items-center gap-2 text-sm text-red-600">
               <AlertCircle className="h-4 w-4" />
               <span>{error}</span>
             </div>
@@ -178,29 +178,29 @@ export default function GitHubPicker({ onSelectionChange }: GitHubPickerProps) {
       {/* Commit List */}
       {selectedRepo && (
         <div>
-          <label className="mb-3 block text-sm font-medium text-slate-400">
+          <label className="mb-3 block text-sm font-medium text-slate-700">
             Select Commits
           </label>
           {commitError ? (
-            <div className="rounded-md border border-red-500/50 bg-red-500/10 p-3">
-              <div className="flex items-center gap-2 text-sm text-red-400">
+            <div className="rounded-md border border-red-200 bg-red-50 p-3">
+              <div className="flex items-center gap-2 text-sm text-red-600">
                 <AlertCircle className="h-4 w-4" />
                 <span>{commitError}</span>
               </div>
             </div>
           ) : loadingCommits ? (
-            <div className="flex h-[300px] items-center justify-center rounded-md border border-slate-700 bg-slate-900/50">
+            <div className="flex h-[300px] items-center justify-center rounded-md border border-slate-200 bg-white shadow-sm">
               <Loader2 className="h-5 w-5 animate-spin text-slate-400" />
               <span className="ml-2 text-sm text-slate-400">
                 Loading commits...
               </span>
             </div>
           ) : commits.length === 0 ? (
-            <div className="flex h-[300px] items-center justify-center rounded-md border border-slate-700 bg-slate-900/50">
+            <div className="flex h-[300px] items-center justify-center rounded-md border border-slate-200 bg-white shadow-sm">
               <p className="text-sm text-slate-500">No commits found</p>
             </div>
           ) : (
-            <ScrollArea className="h-[300px] rounded-md border border-slate-700 bg-slate-900/50 p-4">
+            <ScrollArea className="h-[300px] rounded-md border border-slate-200 bg-white p-4 shadow-sm">
               <div className="space-y-2">
                 {commits.map((commit) => {
                   const isSelected = selectedCommits.has(commit.sha);
@@ -210,8 +210,8 @@ export default function GitHubPicker({ onSelectionChange }: GitHubPickerProps) {
                       className={cn(
                         "flex items-start gap-3 rounded-lg border p-3 transition-colors cursor-pointer",
                         isSelected
-                          ? "border-purple-500/50 bg-purple-500/10"
-                          : "border-slate-700 bg-slate-800/30 hover:border-slate-600"
+                          ? "border-indigo-200 bg-indigo-50"
+                          : "border-slate-200 bg-white hover:bg-slate-50"
                       )}
                       onClick={() => handleCommitToggle(commit.sha)}
                     >
@@ -222,21 +222,21 @@ export default function GitHubPicker({ onSelectionChange }: GitHubPickerProps) {
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <GitCommit className="h-3 w-3 text-slate-400 flex-shrink-0" />
-                          <span className="text-xs font-mono text-purple-400">
+                        <div className="mb-1 flex items-center gap-2">
+                          <GitCommit className="h-3 w-3 flex-shrink-0 text-slate-400" />
+                          <span className="text-xs font-mono text-slate-500">
                             {commit.sha}
                           </span>
-                          <span className="text-xs text-slate-500">
+                          <span className="text-xs text-slate-400">
                             {formatDate(commit.date)}
                           </span>
                         </div>
-                        <p className="text-sm text-slate-200 truncate">
+                        <p className="text-sm text-slate-900 truncate">
                           {commit.message}
                         </p>
                         <div className="mt-1 flex items-center gap-2">
-                          <div className="h-4 w-4 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500" />
-                          <span className="text-xs text-slate-400">
+                          <div className="h-4 w-4 rounded-full bg-slate-900" />
+                          <span className="text-xs text-slate-500">
                             {commit.author_name}
                           </span>
                         </div>
@@ -248,7 +248,7 @@ export default function GitHubPicker({ onSelectionChange }: GitHubPickerProps) {
             </ScrollArea>
           )}
           {selectedCommits.size > 0 && (
-            <p className="mt-2 text-xs text-slate-400">
+            <p className="mt-2 text-xs text-slate-500">
               {selectedCommits.size} commit{selectedCommits.size !== 1 ? "s" : ""}{" "}
               selected
             </p>

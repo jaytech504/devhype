@@ -102,19 +102,19 @@ export default function ContentStudio() {
       case "linkedin":
         return (
           <div className="space-y-4">
-            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
               <div className="mb-4 flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-blue-600" />
+                <div className="h-10 w-10 rounded-full bg-slate-900" />
                 <div>
-                  <div className="h-3 w-24 rounded bg-slate-700" />
-                  <div className="mt-1 h-2 w-16 rounded bg-slate-800" />
+                  <div className="h-3 w-24 rounded bg-slate-200" />
+                  <div className="mt-1 h-2 w-16 rounded bg-slate-100" />
                 </div>
               </div>
               <Textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="Your LinkedIn post content..."
-                className="min-h-[200px] bg-slate-950/50 border-slate-700"
+                className="min-h-[200px]"
               />
               <div className="mt-4 flex items-center gap-4 text-xs text-slate-500">
                 <span>0 likes</span>
@@ -127,26 +127,26 @@ export default function ContentStudio() {
       case "twitter":
         return (
           <div className="space-y-4">
-            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
               <div className="mb-4 flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600" />
+                <div className="h-10 w-10 rounded-full bg-slate-900" />
                 <div>
-                  <div className="h-3 w-24 rounded bg-slate-700" />
-                  <div className="mt-1 h-2 w-16 rounded bg-slate-800" />
+                  <div className="h-3 w-24 rounded bg-slate-200" />
+                  <div className="mt-1 h-2 w-16 rounded bg-slate-100" />
                 </div>
               </div>
               <Textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="Your tweet..."
-                className="min-h-[120px] bg-slate-950/50 border-slate-700"
+                className="min-h-[120px]"
                 maxLength={280}
               />
               <div className="mt-2 flex items-center justify-between text-xs">
                 <span className="text-slate-500">
                   {content.length} / 280 characters
                 </span>
-                <span className="text-cyan-400">Tweet</span>
+                <span className="text-slate-900">Tweet</span>
               </div>
             </div>
           </div>
@@ -160,16 +160,16 @@ export default function ContentStudio() {
               threadPosts.map((post, index) => (
                 <div
                   key={index}
-                  className="rounded-lg border border-slate-800 bg-slate-900/50 p-4"
+                  className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
                 >
-                  <div className="mb-2 text-xs font-semibold text-purple-400">
+                  <div className="mb-2 text-xs font-semibold text-slate-500">
                     {index + 1}/{threadPosts.length}
                   </div>
-                  <p className="text-sm text-slate-200">{post}</p>
+                  <p className="text-sm text-slate-900">{post}</p>
                 </div>
               ))
             ) : (
-              <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6 text-center text-slate-500">
+              <div className="rounded-xl border border-slate-200 bg-white p-6 text-center text-slate-500 shadow-sm">
                 Generate content to see thread preview
               </div>
             )}
@@ -180,21 +180,21 @@ export default function ContentStudio() {
         const [visual, audio] = content.split("\n\n");
         return (
           <div className="space-y-4">
-            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
               <div className="mb-4 grid grid-cols-2 gap-4">
                 <div>
-                  <h4 className="mb-2 text-sm font-semibold text-green-400">
+                  <h4 className="mb-2 text-sm font-semibold text-slate-900">
                     Visual
                   </h4>
-                  <div className="rounded border border-slate-700 bg-slate-950/50 p-3 text-sm text-slate-300">
+                  <div className="rounded border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
                     {visual || "Visual cues and transitions..."}
                   </div>
                 </div>
                 <div>
-                  <h4 className="mb-2 text-sm font-semibold text-green-400">
+                  <h4 className="mb-2 text-sm font-semibold text-slate-900">
                     Audio
                   </h4>
-                  <div className="rounded border border-slate-700 bg-slate-950/50 p-3 text-sm text-slate-300">
+                  <div className="rounded border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
                     {audio || "Narration and voiceover..."}
                   </div>
                 </div>
@@ -209,9 +209,9 @@ export default function ContentStudio() {
   };
 
   return (
-    <Card className="border-slate-800">
+    <Card>
       <CardHeader>
-        <CardTitle className="text-xl font-semibold text-slate-200">
+        <CardTitle className="text-xl font-semibold text-slate-900">
           Content Studio
         </CardTitle>
       </CardHeader>
@@ -221,7 +221,7 @@ export default function ContentStudio() {
           <div className="space-y-6">
             {/* Format Selector */}
             <div>
-              <label className="mb-3 block text-sm font-medium text-slate-400">
+              <label className="mb-3 block text-sm font-medium text-slate-700">
                 Format
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -233,10 +233,7 @@ export default function ContentStudio() {
                       key={format.type}
                       onClick={() => setContentType(format.type)}
                       variant={isActive ? "default" : "outline"}
-                      className={`h-auto flex-col gap-2 py-4 ${isActive
-                        ? `bg-gradient-to-r ${format.color} text-white`
-                        : "border-slate-700 text-slate-300 hover:border-purple-500/50"
-                        }`}
+                      className="h-auto flex-col gap-2 py-4"
                     >
                       <Icon className="h-5 w-5" />
                       <span className="text-xs">{format.label}</span>
@@ -251,7 +248,7 @@ export default function ContentStudio() {
 
             {/* Style Selector */}
             <div>
-              <label className="mb-3 block text-sm font-medium text-slate-400">
+              <label className="mb-3 block text-sm font-medium text-slate-700">
                 Style
               </label>
               <Select
@@ -269,7 +266,7 @@ export default function ContentStudio() {
 
             {/* Angle Text Input */}
             <div>
-              <label className="mb-3 block text-sm font-medium text-slate-400">
+              <label className="mb-3 block text-sm font-medium text-slate-700">
                 Angle (Optional)
               </label>
               <input
@@ -277,7 +274,7 @@ export default function ContentStudio() {
                 value={angle}
                 onChange={(e) => setAngle(e.target.value)}
                 placeholder="e.g., Focus on the technical challenges..."
-                className="flex h-10 w-full rounded-md border border-slate-700 bg-slate-900/50 px-3 py-2 text-sm text-slate-200 ring-offset-slate-950 placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 ring-offset-white placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-100 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               />
             </div>
 
@@ -286,7 +283,7 @@ export default function ContentStudio() {
               onClick={handleGenerate}
               disabled={isGenerating}
               size="lg"
-              className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white shadow-lg shadow-purple-500/50 hover:scale-105 hover:shadow-purple-500/70 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              className="w-full"
             >
               {isGenerating ? (
                 <>
@@ -304,7 +301,7 @@ export default function ContentStudio() {
 
           {/* Right Column - Preview */}
           <div>
-            <label className="mb-3 block text-sm font-medium text-slate-400">
+            <label className="mb-3 block text-sm font-medium text-slate-700">
               Preview
             </label>
             {renderPreview()}

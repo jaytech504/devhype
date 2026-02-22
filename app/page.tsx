@@ -7,7 +7,7 @@ import Footer from "@/components/landing/footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-200">
+    <main className="min-h-screen bg-white text-slate-900">
       <Header />
       <HeroSection />
       <SocialProof />

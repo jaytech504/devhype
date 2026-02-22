@@ -55,23 +55,23 @@ export default function ConsistencyHeatmap({
   });
 
   const getIntensity = (count: number) => {
-    if (count === 0) return "bg-slate-800";
-    if (count === 1) return "bg-green-500/30";
-    if (count === 2) return "bg-green-500/50";
-    if (count >= 3) return "bg-green-500/70";
-    return "bg-slate-800";
+    if (count === 0) return "bg-slate-100";
+    if (count === 1) return "bg-indigo-100";
+    if (count === 2) return "bg-indigo-300";
+    if (count >= 3) return "bg-indigo-500";
+    return "bg-slate-100";
   };
 
   return (
-    <Card className="border-slate-800">
+    <Card>
       <CardHeader>
-        <CardTitle className="text-xl font-semibold text-slate-200">
-          Your Posting History
+        <CardTitle className="text-xl font-semibold text-slate-900">
+          Your posting history
         </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="overflow-x-auto">
-          <div className="flex gap-1 min-w-max">
+          <div className="flex min-w-max gap-1">
             {weeks.map((week, weekIndex) => (
               <div key={weekIndex} className="flex flex-col gap-1">
                 {week.map((day, dayIndex) => {
@@ -96,13 +96,13 @@ export default function ConsistencyHeatmap({
               </div>
             ))}
           </div>
-          <div className="mt-4 flex items-center justify-between text-xs text-slate-400">
+          <div className="mt-4 flex items-center justify-between text-xs text-slate-500">
             <span>Less</span>
             <div className="flex items-center gap-1">
-              <div className="w-3 h-3 rounded-sm bg-slate-800" />
-              <div className="w-3 h-3 rounded-sm bg-green-500/30" />
-              <div className="w-3 h-3 rounded-sm bg-green-500/50" />
-              <div className="w-3 h-3 rounded-sm bg-green-500/70" />
+              <div className="h-3 w-3 rounded-sm bg-slate-100" />
+              <div className="h-3 w-3 rounded-sm bg-indigo-100" />
+              <div className="h-3 w-3 rounded-sm bg-indigo-300" />
+              <div className="h-3 w-3 rounded-sm bg-indigo-500" />
             </div>
             <span>More</span>
           </div>

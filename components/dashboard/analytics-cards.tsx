@@ -46,22 +46,19 @@ export default function AnalyticsCards({
       {cards.map((card) => {
         const Icon = card.icon;
         return (
-          <Card
-            key={card.label}
-            className={`relative overflow-hidden border-2 ${card.borderGradient} bg-gradient-to-br ${card.gradient}`}
-          >
+          <Card key={card.label} className="relative overflow-hidden">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-slate-400">
+                  <p className="text-sm font-medium text-slate-500">
                     {card.label}
                   </p>
-                  <p className="mt-2 text-3xl font-bold text-slate-200">
+                  <p className="mt-2 text-3xl font-bold text-slate-900">
                     {card.value}
                   </p>
                 </div>
                 <div
-                  className={`rounded-lg bg-slate-900/50 p-3 ${card.color}`}
+                  className="rounded-lg bg-slate-100 p-3 text-slate-500"
                 >
                   <Icon className="h-6 w-6" />
                 </div>

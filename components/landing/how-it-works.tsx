@@ -38,13 +38,10 @@ export default function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            How it{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              Works
-            </span>
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            How it works
           </h2>
-          <p className="mt-4 text-lg text-slate-400">
+          <p className="mt-4 text-lg text-slate-500">
             Get started in three simple steps
           </p>
         </motion.div>
@@ -60,24 +57,24 @@ export default function HowItWorks() {
               className="relative"
             >
               {/* Step Card */}
-              <div className="relative h-full rounded-xl border border-slate-800 bg-slate-900/50 p-8 backdrop-blur-sm transition-all hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20">
+              <div className="relative h-full rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
                 {/* Step Number Background */}
-                <div className="absolute -top-4 -right-4 text-7xl font-bold text-slate-800/50 lg:text-8xl">
+                <div className="absolute -top-4 -right-4 text-7xl font-bold text-slate-100 lg:text-8xl">
                   {step.number}
                 </div>
 
                 {/* Icon */}
-                <div
-                  className={`mb-6 inline-flex rounded-2xl bg-gradient-to-r ${step.gradient} p-4 shadow-lg shadow-purple-500/20`}
-                >
-                  <step.icon className="h-8 w-8 text-white" />
+                <div className="mb-6 inline-flex rounded-2xl bg-indigo-50 p-4 text-indigo-600">
+                  <step.icon className="h-8 w-8" />
                 </div>
 
                 {/* Title */}
-                <h3 className="mb-3 text-2xl font-semibold">{step.title}</h3>
+                <h3 className="mb-3 text-2xl font-semibold text-slate-900">
+                  {step.title}
+                </h3>
 
                 {/* Description */}
-                <p className="text-slate-400">{step.description}</p>
+                <p className="text-sm text-slate-600">{step.description}</p>
               </div>
 
               {/* Arrow between steps - hidden on mobile, shown on desktop */}
@@ -86,9 +83,9 @@ export default function HowItWorks() {
                   <motion.div
                     animate={{ x: [0, 5, 0] }}
                     transition={{ repeat: Infinity, duration: 2, delay: index * 0.3 }}
-                    className="rounded-full bg-slate-800 p-2"
+                    className="rounded-full bg-slate-100 p-2"
                   >
-                    <ArrowRight className="h-6 w-6 text-cyan-400" />
+                    <ArrowRight className="h-6 w-6 text-slate-400" />
                   </motion.div>
                 </div>
               )}

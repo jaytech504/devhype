@@ -66,7 +66,7 @@ export default function ConsistencyHeatmap({
     <Card>
       <CardHeader>
         <CardTitle className="text-xl font-semibold text-slate-900">
-          Your posting history
+          Your generation activity
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -89,7 +89,7 @@ export default function ConsistencyHeatmap({
                       className={`w-3 h-3 rounded-sm ${getIntensity(
                         day.count
                       )} hover:ring-2 hover:ring-green-400/50 transition-all cursor-pointer`}
-                      title={`${day.date}: ${day.count} posts`}
+                      title={`${day.date}: ${day.count} generated posts`}
                     />
                   );
                 })}

@@ -24,7 +24,7 @@ export default function AnalyticsCards({
       borderGradient: "border-orange-500/30",
     },
     {
-      label: "Total Posts",
+      label: "Total Posts Generated",
       value: totalPosts.toString(),
       icon: Zap,
       color: "text-yellow-500",

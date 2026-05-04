@@ -51,7 +51,7 @@ export default async function HistoryPage() {
   return (
     <div className="mx-auto max-w-7xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-200">
+        <h1 className="text-3xl text-gray-700 font-bold tracking-tight text-slate-200">
           History
         </h1>
         <p className="mt-2 text-slate-400">
@@ -61,7 +61,7 @@ export default async function HistoryPage() {
 
       <Card className="border-slate-800">
         <CardHeader>
-          <CardTitle className="text-xl font-semibold text-slate-200">
+          <CardTitle className="text-xl text-gray-700 font-semibold ">
             Post History
           </CardTitle>
         </CardHeader>
@@ -82,7 +82,7 @@ export default async function HistoryPage() {
           ) : (
             <div className="space-y-4">
               {posts.map((post) => (
-                <div key={String(post.id)} className="rounded-lg border border-slate-800 bg-slate-900/40 p-4">
+                <div key={String(post.id)} className="rounded-lg border border-slate-800 bg-gray-200 p-4">
                   <div className="mb-2 flex flex-wrap items-center gap-2 text-xs text-slate-400">
                     <span>{formatTimestamp(post.created_at)}</span>
                     {post.platform ? (
@@ -98,7 +98,7 @@ export default async function HistoryPage() {
                       <span className="rounded bg-slate-800 px-2 py-0.5">{post.commit_count} commits</span>
                     ) : null}
                   </div>
-                  <p className="whitespace-pre-wrap text-sm text-slate-200">
+                  <p className="whitespace-pre-wrap text-gray-700 text-sm ">
                     {post.content?.trim() || "Generated post entry"}
                   </p>
                 </div>

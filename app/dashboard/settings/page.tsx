@@ -12,10 +12,10 @@ export default async function SettingsPage() {
   return (
     <div className="mx-auto max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-200">
+        <h1 className="text-3xl text-gray-700 font-bold tracking-tight text-slate-200">
           Settings
         </h1>
-        <p className="mt-2 text-slate-400">
+        <p className="mt-2 text-slate-400 text-gray-700">
           Manage your account and preferences
         </p>
       </div>
@@ -24,22 +24,22 @@ export default async function SettingsPage() {
         {/* Account Settings */}
         <Card className="border-slate-800">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold text-slate-200">
+            <CardTitle className="text-xl text-gray-700 font-semibold ">
               Account
             </CardTitle>
-            <CardDescription className="text-slate-400">
+            <CardDescription className="text-slate-400 text-gray-500  ">
               Your account information
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <label className="text-sm font-medium text-slate-400">Email</label>
-              <p className="mt-1 text-slate-200">{user?.email}</p>
+              <label className="text-sm font-medium text-slate-400 text-gray-700">Email</label>
+              <p className="mt-1 text-slate-200 text-gray-600">{user?.email}</p>
             </div>
             {user?.user_metadata?.full_name && (
               <div>
-                <label className="text-sm font-medium text-slate-400">Name</label>
-                <p className="mt-1 text-slate-200">{user.user_metadata.full_name}</p>
+                <label className="text-sm font-medium text-slate-400 text-gray-700">Name</label>
+                <p className="mt-1 text-slate-200 text-gray-600">{user.user_metadata.full_name}</p>
               </div>
             )}
           </CardContent>
@@ -48,10 +48,10 @@ export default async function SettingsPage() {
         {/* Sign Out */}
         <Card className="border-slate-800">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold text-slate-200">
+            <CardTitle className="text-xl text-gray-700 font-semibold ">
               Sign Out
             </CardTitle>
-            <CardDescription className="text-slate-400">
+            <CardDescription className="text-slate-400 text-gray-700">
               Sign out of your account
             </CardDescription>
           </CardHeader>

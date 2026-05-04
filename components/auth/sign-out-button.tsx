@@ -35,7 +35,7 @@ export default function SignOutButton() {
       onClick={handleSignOut}
       disabled={loading}
       variant="outline"
-      className="border-slate-700 text-slate-200 hover:border-red-500/50 hover:bg-slate-800 hover:text-red-400 disabled:opacity-50"
+      className="border-slate-700 text-gray-700 hover:border-red-500/50 hover:bg-slate-800 hover:text-red-400 disabled:opacity-50"
     >
       {loading ? "Signing out..." : "Sign Out"}
     </Button>

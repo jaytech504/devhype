@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { GitCommit, ArrowRight, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -40,9 +41,11 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-10 flex items-center justify-center gap-4"
           >
+            <Link href="/login">
             <Button size="lg" className="px-8 py-6 text-lg">
               Start for free
             </Button>
+            </Link>
           </motion.div>
         </motion.div>
 

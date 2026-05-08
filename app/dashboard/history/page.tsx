@@ -51,7 +51,7 @@ export default async function HistoryPage() {
   return (
     <div className="mx-auto max-w-7xl">
       <div className="mb-8">
-        <h1 className="text-3xl text-gray-700 font-bold tracking-tight text-slate-200">
+        <h1 className="text-3xl text-gray-700 font-bold tracking-tight ">
           History
         </h1>
         <p className="mt-2 text-slate-400">

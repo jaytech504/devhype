@@ -121,7 +121,7 @@ export default function Sidebar({ userEmail, userAvatar }: SidebarProps) {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed left-0 top-0 z-40 h-screen w-64 border-r border-slate-200 bg-slate-50/50 flex flex-col transition-transform duration-300",
+          "fixed left-0 top-0 z-40 h-screen w-64 border-r bg-white border-slate-200 bg-slate-50/50 flex flex-col transition-transform duration-300",
           isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >

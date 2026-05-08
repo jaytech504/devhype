@@ -12,7 +12,7 @@ export default async function SettingsPage() {
   return (
     <div className="mx-auto max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-3xl text-gray-700 font-bold tracking-tight text-slate-200">
+        <h1 className="text-3xl text-gray-700 font-bold tracking-tight ">
           Settings
         </h1>
         <p className="mt-2 text-slate-400 text-gray-700">
@@ -34,12 +34,12 @@ export default async function SettingsPage() {
           <CardContent className="space-y-4">
             <div>
               <label className="text-sm font-medium text-slate-400 text-gray-700">Email</label>
-              <p className="mt-1 text-slate-200 text-gray-600">{user?.email}</p>
+              <p className="mt-1 text-gray-600">{user?.email}</p>
             </div>
             {user?.user_metadata?.full_name && (
               <div>
                 <label className="text-sm font-medium text-slate-400 text-gray-700">Name</label>
-                <p className="mt-1 text-slate-200 text-gray-600">{user.user_metadata.full_name}</p>
+                <p className="mt-1 text-gray-600">{user.user_metadata.full_name}</p>
               </div>
             )}
           </CardContent>

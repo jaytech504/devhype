@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Sidebar from "@/components/dashboard/sidebar";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export default async function DashboardLayout({
   children,

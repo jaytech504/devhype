@@ -2,7 +2,8 @@ import AnalyticsCards from "@/components/dashboard/analytics-cards";
 import ConsistencyHeatmap from "@/components/dashboard/consistency-heatmap";
 import ContentStudio from "@/components/dashboard/content-studio";
 import { createClient } from "@/lib/supabase/server";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next"
 
 type ContributionPoint = {
     date: string;

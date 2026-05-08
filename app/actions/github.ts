@@ -29,7 +29,7 @@ async function getGitHubClient() {
   } = await supabase.auth.getSession();
 
   if (!session) {
-    throw new Error("No active session. Please sign in.");
+    throw new Error("Your session expired. Please log in again to load repositories.");
   }
 
   // Extract provider_token from the session
@@ -37,7 +37,7 @@ async function getGitHubClient() {
 
   if (!providerToken) {
     throw new Error(
-      "GitHub access token not found. Please sign out and sign in again to refresh GitHub access."
+      "GitHub connection expired. Please log in again to reconnect GitHub and load repositories."
     );
   }
 
@@ -71,6 +71,12 @@ export async function fetchUserRepos(): Promise<GitHubRepo[]> {
   } catch (error) {
     console.error("Error fetching repos:", error);
     if (error instanceof Error) {
+      if (
+        error.message.toLowerCase().includes("bad credentials") ||
+        error.message.toLowerCase().includes("requires authentication")
+      ) {
+        throw new Error("GitHub session expired. Please log in again to load repositories.");
+      }
       throw error;
     }
     throw new Error("Failed to fetch repositories");

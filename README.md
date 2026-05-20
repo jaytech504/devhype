@@ -31,8 +31,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - **Next.js 14** (App Router)
 - **TypeScript**
 - **Tailwind CSS**
-- **Framer Motion** (animations)
-- **Lucide React** (icons)
 - **Shadcn/UI** (component library)
 
 ## Project Structure

@@ -54,11 +54,6 @@ devhype/
     └── utils.ts
 ```
 
-## Features
 
-- 🎨 Cyberpunk Professional aesthetic
-- 📱 Fully responsive design
-- ✨ Smooth animations with Framer Motion
-- 🚀 Optimized for performance
 
 

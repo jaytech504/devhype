@@ -55,7 +55,7 @@ export default async function HistoryPage() {
           History
         </h1>
         <p className="mt-2 text-slate-400">
-          View your past generated content
+          View your past content
         </p>
       </div>
 
@@ -68,7 +68,7 @@ export default async function HistoryPage() {
         <CardContent>
           {!user ? (
             <div className="py-12 text-center text-slate-400">
-              <p>Sign in to see your generated content history.</p>
+              <p>Sign in to see your history.</p>
             </div>
           ) : loadError ? (
             <div className="py-12 text-center text-slate-400">

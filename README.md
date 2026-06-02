@@ -33,26 +33,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - **Tailwind CSS**
 - **Shadcn/UI** (component library)
 
-## Project Structure
 
-```
-devhype/
-├── app/
-│   ├── layout.tsx
-│   ├── page.tsx
-│   └── globals.css
-├── components/
-│   ├── landing/
-│   │   ├── hero-section.tsx
-│   │   ├── social-proof.tsx
-│   │   ├── feature-grid.tsx
-│   │   ├── how-it-works.tsx
-│   │   └── footer.tsx
-│   └── ui/
-│       └── button.tsx
-└── lib/
-    └── utils.ts
-```
 
 
 

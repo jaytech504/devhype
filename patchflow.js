@@ -31,7 +31,7 @@ const https = require('https');
 const http = require('http');
 
 const SDK_VERSION = '0.1.0';
-const DEFAULT_HOST = 'https://api.patchflow.dev';
+const DEFAULT_HOST = 'https://patchflow-backend-xax6.onrender.com';
 
 // ── Singleton ─────────────────────────────────────────────────────────────────
 

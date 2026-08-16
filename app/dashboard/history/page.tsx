@@ -24,27 +24,66 @@ function formatTimestamp(value: string | null) {
 
 export default async function HistoryPage() {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const FETCH_TIMEOUT_MS = 10000;
 
+  let user: any = null;
   let posts: HistoryRow[] = [];
   let loadError: string | null = null;
 
-  if (user) {
-    const { data, error } = await supabase
-      .from("posts")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("created_at", { ascending: false })
-      .limit(100);
+  try {
+    // 1. Handle Authentication with Timeout
+    const authResult = await Promise.race([
+      supabase.auth.getUser(),
+      new Promise<any>((_, reject) =>
+        setTimeout(() => reject(new Error("AUTH_TIMEOUT")), FETCH_TIMEOUT_MS)
+      ),
+    ]);
 
-    if (error) {
-      if (!isMissingPostsTableError(error.message)) {
-        loadError = error.message;
+    const { data: { user: authUser }, error: authError } = authResult;
+
+    if (authError) {
+      throw new Error("AUTH_FAILED");
+    }
+    user = authUser;
+
+    if (user) {
+      // 2. Handle Database Fetching with strict Timeout
+      const dbResult = await Promise.race([
+        supabase
+          .from("posts")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("created_at", { ascending: false })
+          .limit(100),
+        new Promise<any>((_, reject) =>
+          setTimeout(() => reject(new Error("DB_TIMEOUT")), FETCH_TIMEOUT_MS)
+        ),
+      ]);
+
+      const { data, error: dbError } = dbResult;
+
+      if (dbError) {
+        console.error("[HistoryPage DB Error]:", dbError.message);
+        if (isMissingPostsTableError(dbError.message)) {
+          loadError = null;
+        } else {
+          // Mask technical details to prevent leaking internal DB state
+          loadError = "We encountered an issue retrieving your history. Please try again later.";
+        }
+      } else {
+        posts = Array.isArray(data) ? (data as HistoryRow[]) : [];
       }
+    }
+  } catch (err: any) {
+    console.error("[HistoryPage Fatal Error]:", err);
+
+    // Map specific error types to user-friendly, non-leaking messages
+    if (err.message === "AUTH_TIMEOUT" || err.message === "DB_TIMEOUT") {
+      loadError = "The request took too long to respond. Please check your connection and try again.";
+    } else if (err.message === "AUTH_FAILED") {
+      loadError = "We couldn't verify your identity. Please sign in again.";
     } else {
-      posts = Array.isArray(data) ? (data as HistoryRow[]) : [];
+      loadError = "An unexpected error occurred while loading the dashboard.";
     }
   }
 
@@ -110,4 +149,3 @@ export default async function HistoryPage() {
     </div>
   );
 }
-

@@ -2,8 +2,8 @@ import AnalyticsCards from "@/components/dashboard/analytics-cards";
 import ConsistencyHeatmap from "@/components/dashboard/consistency-heatmap";
 import ContentStudio from "@/components/dashboard/content-studio";
 import { createClient } from "@/lib/supabase/server";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/next"
+
+export const dynamic = "force-dynamic";
 
 type ContributionPoint = {
     date: string;
@@ -129,29 +129,6 @@ export default async function DashboardPage() {
                 <ConsistencyHeatmap data={contributionData} />
             </div>
 
-            <ContentStudio />
-        </div>
-    );
-}
-
-            {/* Error Banner - Addresses the 'client will hang' issue by providing visual feedback */}
-            {errorState && (
-                <div className="mb-8 p-4 bg-red-50 border border-red-200 text-red-700 rounded-md">
-                    {errorState}
-                </div>
-            )}
-
-            {/* Analytics Cards */}
-            <div className="mb-8">
-                <AnalyticsCards streak={streak} totalPosts={totalPosts} consistencyScore={consistencyScore} />
-            </div>
-
-            {/* Consistency Heatmap */}
-            <div className="mb-8">
-                <ConsistencyHeatmap data={contributionData} />
-            </div>
-
-            {/* Content Studio */}
             <ContentStudio />
         </div>
     );

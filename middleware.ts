@@ -1,12 +1,6 @@
 import { type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
-import patchflow from './patchflow'; 
-
-patchflow.init({
-  apiKey: process.env.PATCHFLOW_API_KEY!,
-});
-
 
 export async function middleware(request: NextRequest) {
   return await updateSession(request);

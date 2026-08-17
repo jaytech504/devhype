@@ -1,9 +1,17 @@
-// instrumentation.ts — place in your project root (or src/)
-import patchflow from './patchflow';
+// instrumentation.ts — place in project root (or src/)
+import patchflow from './patchflow'; // or from '@/lib/patchflow'
 
 export function register() {
   patchflow.init({
-    apiKey: 'pf_live_d475bc09656b1ee3ad0f6369a4c502deb66b1f0df8cbe51784e70b9e5c4f9042'
+    apiKey: process.env.PATCHFLOW_API_KEY!
   });
 }
-// That's it! Every route, API handler, and server action is now monitored.
+
+// ⚡ Automatically intercepts all unhandled errors across all API routes & pages:
+export async function onRequestError(err: any, request: any) {
+  patchflow.captureException(err, {
+    endpoint: request?.path || '',
+    method: request?.method || 'GET',
+    framework: 'nextjs',
+  });
+}
